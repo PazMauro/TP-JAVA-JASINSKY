@@ -54,9 +54,12 @@ public class Main {
 		int clasificacion;
 		
 		System.out.println("ingrese id del juego dentro del rango 1000 a 9999: " + i);
+		int max = 9999;
+		int min = 1000;
 		id = S.nextInt();
 		juegos[i][0] = String.valueOf(id);
 		S.nextLine();
+		parametro(id, min, max);
 		
 		System.out.println("ingrese titulo del juego: ");
 		juegos[i][1] = S.nextLine();
@@ -149,22 +152,29 @@ public class Main {
 			
 	}
 	
+	public static void parametro (int id, int min, int max) {
+
+		
 	
-	public static void ingresarEntero (String juegos[][]) {
-		int minid;
-		int maxid;
-		
-		minid=1000;
-		maxid=9999;
-		
 		boolean error = false;
 		
 		do {
+			try {
+				 
+				
+				if (id >= min && id <= max) {
+					System.out.println("Numero valido");
+					error=true;
+				}
+				else {
+					System.out.println("Numero no valido");
+				}
+			}
+			catch(NumberFormatException e) {
+                System.out.println("Entrada inválida. Por favor, ingresá un número.");
+             }
 			
-			
-			
-			
-		}while(error);
+		}while(!error);
 		
 	}
 
