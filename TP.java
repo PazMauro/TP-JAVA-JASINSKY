@@ -109,41 +109,47 @@ public class Main {
 	
 			break;
 		case 2:
-			
+			//Consultar juego
+
 			break;
 		case 3:
-				
+			//Modificar juego
+	
 			break;
 		case 4:
-				
+			//Eliminar juego
+
 				
 			break;
 		case 5:
-				
+				//Listar todo los juegos
 				
 			break;
 		case 6:
-				
+			buscarJuegosPorGenero(juegos);
+			//Buscar juegos por género
 				
 			break;	
 		case 7:
-				
+			//Buscar juegos por desarrollador
 				
 			break;
 		case 8:
-				
+			//Buscar juegos mejor/peor calificados
 				
 			break;
 		case 9:
-				
+			//Buscar juegos por rango de precio
+
 				
 			break;
 		case 10:
-				
+			//Calcular estadísticas de la plataforma
+	
 				
 			break;
 		case 11:
-				
+				//salir
 				
 			break;
 	}
@@ -151,6 +157,25 @@ public class Main {
 
 			
 	}
+
+	public static void buscarJuegosPorGenero(String juegos[][]) {
+		Scanner S= new Scanner (System.in);
+		int ValorBuscado;
+		System.out.println("Ingrese el genero que deseas buscar: ");
+		ValorBuscado=S.nextInt();
+		S.nextLine();
+			boolean encontrado=false;
+		
+		for(int i =0; i<juegos.length; i++) {
+				if(juegos[i][3]!=null && juegos[i][3].equals(String.valueOf(ValorBuscado))) {
+					System.out.println("El juego " + juegos[i][1] +" "+ "es de genero : " + ValorBuscado);
+					encontrado=true;
+				}
+				}
+		if(encontrado=false){
+			System.out.println("No se encontro ningun juego con ese genero");
+			}
+		}
 	
 	public static void parametro (int id, int min, int max) {
 
