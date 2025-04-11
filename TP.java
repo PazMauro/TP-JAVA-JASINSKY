@@ -59,7 +59,7 @@ public class Main {
 		id = S.nextInt();
 		juegos[i][0] = String.valueOf(id);
 		S.nextLine();
-		parametro(id, min, max);
+		/*parametro(id, min, max);*/
 		
 		System.out.println("ingrese titulo del juego: ");
 		juegos[i][1] = S.nextLine();
@@ -69,7 +69,7 @@ public class Main {
 		juegos[i][2] = S.nextLine();
 
 		
-		System.out.println("ingrese genero del juego: ");
+		System.out.println("ingrese genero del juego: (1-accion 2-aventura 3-estrategia 4-rpg 5-deportes 6-simulacion)");
 		genero = S.nextInt();
 		juegos[i][3] = String.valueOf(genero);
 		S.nextLine();
@@ -109,17 +109,24 @@ public class Main {
 	
 			break;
 		case 2:
-			//Consultar juego
+			/*int minGen = 1; 
+			int maxGen=5;
+			buscarJuegosPorGenero();
+			parametro(juegos [][], minGen, maxGen);
+			//Consultar juego*/
 
 			break;
 		case 3:
+			Scanner S = new Scanner (System.in);
 			//Modificar juego
-	
+			modificarJuego(juegos,S);
+			S.close();
 			break;
 		case 4:
+			/*Scanner S = new Scanner (System.in);
 			//Eliminar juego
-
-				
+			eliminarJuego(juegos,S);
+			*/	
 			break;
 		case 5:
 				//Listar todo los juegos
@@ -177,22 +184,22 @@ public class Main {
 			}
 		}
 	
-	public static void parametro (int id, int min, int max) {
+	public static void parametro (String juegos[][], int min, int max) {
 
 		
 	
-		boolean error = false;
+		boolean error = true;
 		
 		do {
 			try {
-				 
 				
-				if (id >= min && id <= max) {
+				if (juegos[i][0] >= min && juegos[i][0] <= max) {
 					System.out.println("Numero valido");
-					error=true;
+					error=false;
 				}
 				else {
 					System.out.println("Numero no valido");
+					error=true;
 				}
 			}
 			catch(NumberFormatException e) {
@@ -202,5 +209,19 @@ public class Main {
 		}while(!error);
 		
 	}
-
+	public static void modificarJuego(String juegos[][], Scanner S) {
+			System.out.println("Que numero de juego desea modificar");
+			int numJuego = S.nextInt();
+			S.nextLine();
+			ingresarJuego(juegos, numJuego);
+	}
+	
+	/*public static void eliminarJuego(String juegos[][], Scanner S){
+		System.out.println("Que numero de juego desea eliminar");
+		int numJuego = S.nextInt();
+		S.nextLine();
+		for(int i=0; i<7; i++) {
+			juegos[numJuego][i] = null;
+		}
+	}*/
 }
