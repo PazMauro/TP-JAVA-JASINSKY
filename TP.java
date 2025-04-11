@@ -5,12 +5,15 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		Scanner S = new Scanner (System.in);
+		
 		int opcion,i = 0;
 		String juegos [][] = new String [80][8];
 	
 		do{
 		opcion = mostrarMenuYElegirOpcion ();	
-		i = generarAccion (opcion,juegos,i);
+		i = generarAccion(opcion,juegos,i,S);
 
 			
 		}while(opcion != 11);
@@ -129,6 +132,7 @@ public class Main {
 			*/	
 			break;
 		case 5:
+			
 				//Listar todo los juegos
 				
 			break;
@@ -165,11 +169,41 @@ public class Main {
 
 			
 	}
+	
+	
+	
+	public static void buscarJuego(String juegos[][]) {
+		Scanner S= new Scanner (System.in);
+		
+		String ConsultarJuegosT;
+		
+		int ConsultarJuegosId=0;
+		
+		int opcion=0;
+		
+		System.out.println("Como deseas realizar la busqueda por ID o el titulo del juego: ");
+		opcion=S.nextInt();
+		
+		S.nextLine();
+		
+		boolean encontrado = false;
+		
+		if (opcion==1) {
+			for(int i=0; i<juegos.length; i++) {
+				
+			}
+		}
+		
+		if (opcion==2) {
+			
+		}
+		
+		}
 
 	public static void buscarJuegosPorGenero(String juegos[][]) {
 		Scanner S= new Scanner (System.in);
 		
-		int ValorBuscado;
+		int ValorBuscado=0;
 		
 		System.out.println("Ingrese el genero que deseas buscar: ");
 		
