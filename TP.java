@@ -36,7 +36,7 @@ public class Main {
 			System.out.println("--------------------------------------------------------------");
 
 			Scanner S = new Scanner (System.in);
-			System.out.println("ingrese una opcion: ");	
+			System.out.println("Ingrese una opcion: ");	
 			opcion = S.nextInt();	
 			
 		return opcion;
@@ -53,7 +53,7 @@ public class Main {
 		int anio;
 		int clasificacion;
 		
-		System.out.println("ingrese id del juego dentro del rango 1000 a 9999: " + i);
+		System.out.println("Ingrese id del juego dentro del rango 1000 a 9999: " + i);
 		int max = 9999;
 		int min = 1000;
 		id = S.nextInt();
@@ -61,35 +61,35 @@ public class Main {
 		S.nextLine();
 		/*parametro(id, min, max);*/
 		
-		System.out.println("ingrese titulo del juego: ");
+		System.out.println("Ingrese titulo del juego: ");
 		juegos[i][1] = S.nextLine();
 		
 		
-		System.out.println("ingrese desarrolador del juego: ");
+		System.out.println("Ingrese desarrolador del juego: ");
 		juegos[i][2] = S.nextLine();
 
 		
-		System.out.println("ingrese genero del juego: (1-accion 2-aventura 3-estrategia 4-rpg 5-deportes 6-simulacion)");
+		System.out.println("Ingrese genero del juego: (1-accion 2-aventura 3-estrategia 4-rpg 5-deportes 6-simulacion) ");
 		genero = S.nextInt();
 		juegos[i][3] = String.valueOf(genero);
 		S.nextLine();
 		
-		System.out.println("ingrese clasificacion del juego: ");
+		System.out.println("Ingrese clasificacion del juego: ");
 		clasificacion = S.nextInt();
 		juegos[i][4] = String.valueOf(clasificacion);
 		S.nextLine();
 		
-		System.out.println("ingrese año de lanzamiento del juego: ");
+		System.out.println("Ingrese año de lanzamiento del juego: ");
 		anio = S.nextInt();
 		juegos[i][5] = String.valueOf(anio);
 		S.nextLine();
 		
-		System.out.println("ingrese el precio del juego: ");
+		System.out.println("Ingrese el precio del juego: ");
 		precio = S.nextInt();
 		juegos[i][6] = String.valueOf(precio);
 		S.nextLine();
 		
-		System.out.println("ingrese la calificacion del juego: ");
+		System.out.println("Ingrese la calificacion del juego: ");
 		calificacion = S.nextInt();
 		juegos[i][7] = String.valueOf(calificacion);
 		S.nextLine();
@@ -138,6 +138,7 @@ public class Main {
 				
 			break;	
 		case 7:
+			buscarJuegosPorDesarrollador(juegos);
 			//Buscar juegos por desarrollador
 				
 			break;
@@ -167,10 +168,15 @@ public class Main {
 
 	public static void buscarJuegosPorGenero(String juegos[][]) {
 		Scanner S= new Scanner (System.in);
+		
 		int ValorBuscado;
+		
 		System.out.println("Ingrese el genero que deseas buscar: ");
+		
 		ValorBuscado=S.nextInt();
+		
 		S.nextLine();
+		
 			boolean encontrado=false;
 		
 		for(int i =0; i<juegos.length; i++) {
@@ -179,10 +185,39 @@ public class Main {
 					encontrado=true;
 				}
 				}
-		if(encontrado=false){
+		if(encontrado==false){
 			System.out.println("No se encontro ningun juego con ese genero");
 			}
 		}
+	
+	
+	
+	
+	public static void buscarJuegosPorDesarrollador(String juegos[][]) {
+		Scanner S= new Scanner (System.in);
+		
+		String ValorBuscadoG;
+		
+		System.out.println("Ingrese el desarrolador que deseas buscar: ");
+		
+		ValorBuscadoG=S.nextLine();
+		
+			boolean encontrado = false;
+		
+		for(int i =0; i<juegos.length; i++) {
+			
+				if(juegos[i][2] != null && juegos[i][2].equalsIgnoreCase(ValorBuscadoG)) {
+					
+					System.out.println("El juego " + juegos[i][1] +" "+ "es desarrolado por: " + ValorBuscadoG);
+					encontrado = true;
+				}
+				
+				}
+		if (!encontrado) {
+		    System.out.println("No se encontró ningún juego con ese desarrollador.");
+		}
+		
+	}
 	
 	public static void parametro (String juegos[][], int min, int max) {
 
