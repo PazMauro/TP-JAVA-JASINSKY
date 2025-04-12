@@ -64,7 +64,7 @@ public class Main {
 				//Eliminar juego
 				break;
 			case 5:
-				//Listar todo los juegos
+				listarJuegos(contadorJuegos, juegos);//Listar todo los juegos
 				break;
 			case 6:
 				//Buscar juegos por género
@@ -347,6 +347,15 @@ public class Main {
 				
 	
 	}
+	
+	public static void listarJuegos (int cantJuegos, String juegos[][]) {
+		
+		for(int i=0; i<cantJuegos; i++) {
+			
+			System.out.println(juegos[i][1]);
+		}
+		
+	
+	}
 
 }
-	
