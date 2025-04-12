@@ -315,9 +315,38 @@ public class Main {
 	    System.out.println("No se encontró ningún juego con ese ID.");
 	}
 	
-	public static void consultarJuego (String juegos[][]) {
-	
+	public static void consultarJuego (String juegos[][],Scanner S) {
+		int id;
+	System.out.println("que juego queres consultar decime la id: ");
+		id = S.nextInt();
+		boolean encontrar = false;
+		int posjuego;
+			for (int i = 0;i<juegos.length;i++) {
+				if (juegos[i][0] != null && juegos[i][0].equals(String.valueOf(id))) {
+				encontrar = true;
+				posjuego = i;
+				System.out.println("se encontro la id del juego estos son los datos: ");
+				
+				System.out.println("la id es: " + juegos[posjuego][0]);
+				System.out.println("la titulo es: " + juegos[posjuego][1]);
+				System.out.println("la desarrollador es: " + juegos[posjuego][2]);
+				System.out.println("la género es: " + juegos[posjuego][3]);
+				System.out.println("la clasificacion es: " + juegos[posjuego][4]);
+				System.out.println("la año es: " + juegos[posjuego][5]);
+				System.out.println("la precio es: " + juegos[posjuego][6]);
+				System.out.println("la calificacion es: " + juegos[posjuego][7]);
+				}
+				
+			
+			}
+				if (encontrar != true) {
+				System.out.println("el juego no se encontro por esa id: ");
+				}
+				
+			
+				
 	
 	}
 
 }
+	
