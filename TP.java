@@ -365,6 +365,8 @@ public class Main {
 		String gen=null;
 		String des=null;
 		
+		boolean encontrar = false;
+		
 		for(int i=0; i<cantJuegos; i++) {
 			
 			if(juegos[i][1].equals(jueg)) {
@@ -372,8 +374,14 @@ public class Main {
 				 des = juegos[i][2];
 				 gen = juegos[i][3];
 			
+				 encontrar=true;
 			}
 		}
+		
+		if(!encontrar) {
+			System.out.println("no se encontro un juego similar");
+		}
+		
 		System.out.println("los juegos similares a este son: \n");
 		for(int i=0; i<cantJuegos; i++) {
 			if(juegos[i][2].equals(des) || juegos[i][3].equals(gen)) {
