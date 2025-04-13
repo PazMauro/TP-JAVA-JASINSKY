@@ -367,13 +367,12 @@ public class Main {
 		
 		for(int i=0; i<cantJuegos; i++) {
 			
-			if(juegos[i][1] == jueg) {
+			if(juegos[i][1].equals(jueg)) {
 				
 				 des = juegos[i][2];
 				 gen = juegos[i][3];
 			
 			}
-		
 		}
 		System.out.println("los juegos similares a este son: \n");
 		for(int i=0; i<cantJuegos; i++) {
