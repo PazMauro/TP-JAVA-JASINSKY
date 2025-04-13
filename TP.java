@@ -397,7 +397,7 @@ public class Main {
 	public static void buscarJuegosCalificacion (String juegos[][],Scanner S,int contadorJuegos) {
 		int peor = 9999,mejor = 0,calificacion,posjuego,calificacionmax = 0,calificacionmin = 0;
 		boolean encontrar = false;
-		System.out.println("inglrese la calificacion que queres buscar: ");
+		System.out.println("ingrese la calificacion que queres buscar (1 para E (Para todos), 2 para T (Teen), 3 para M (Mature): ");
 		calificacion = S.nextInt();
 		
 			for (int i = 0 ; i < contadorJuegos;i++) {
