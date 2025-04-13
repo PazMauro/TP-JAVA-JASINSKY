@@ -42,8 +42,8 @@ public class Main {
 			System.out.println("--------------------------------------------------------------");
 
 			System.out.println("Ingrese una opcion: ");	
-			return S.nextInt();
-			
+			int opcion= ingresarEntero(S,1,11);
+			return opcion;
 			
 	}
 	
@@ -127,33 +127,27 @@ public class Main {
 		return cantJuegos+1;
 	}
 	
-	public static int ingresarEntero(Scanner S,int min, int max) {
-		
-		boolean valido=false;
-		int entero=0;
-		do {
-			
-		try {
-			
-			entero=S.nextInt();
-			if(entero >= min && entero <= max) {
-				System.out.println("El numero ingresado es valido");
-				valido=true;
-			} else {
-				System.out.println("El numero ingresado esta fuera del rango. Intente nuevamente: ");
-			}
-			
-			}catch(InputMismatchException e) {
-				System.out.println("Eso no es un numero valido. intenta nuevamente: ");
-				S.nextLine();
-			}
-		
-		
-		S.nextLine();
-		}while(!valido);
-		
-		return entero;
+	public static int ingresarEntero(Scanner S, int min, int max) {
+	    boolean valido = false;
+	    int entero = 0;
+
+	    do {
+	        try {
+	            entero = S.nextInt();
+	            if (entero >= min && entero <= max) {
+	                valido = true;
+	            } else {
+	                System.out.println("El numero ingresado esta fuera del rango. Intente nuevamente: ");
+	            }
+	        } catch (InputMismatchException e) {
+	            System.out.println("Eso no es un numero valido. intenta nuevamente: ");
+	        }
+	        S.nextLine();
+	    } while (!valido);
+
+	    return entero;
 	}
+
 	
 	public static void consultarJuego (String juegos[][],Scanner S) {
 		int id;
