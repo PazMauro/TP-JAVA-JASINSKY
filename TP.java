@@ -73,7 +73,7 @@ public class Main {
 				 buscarJuegosPorDesarrollador(juegos,S);
 				break;
 			case 8:
-				//Buscar juegos mejor/peor calificados
+				buscarJuegosCalificacion (juegos,S,contadorJuegos);
 				break;
 			case 9:
 				//Buscar juegos por rango de precio
@@ -389,9 +389,38 @@ public class Main {
 			}
 		}
 	}
-	public static void buscarJuegosCalificacion (String juegos[][],Scanner S) {
-		int peor,mejor;
+	public static void buscarJuegosCalificacion (String juegos[][],Scanner S,int contadorJuegos) {
+		int peor = 9999,mejor = 0,calificacion,posjuego,calificacionmax = 0,calificacionmin = 0;
+		boolean encontrar = false;
+		System.out.println("inglrese la calificacion que queres buscar: ");
+		calificacion = S.nextInt();
 		
+			for (int i = 0 ; i < contadorJuegos;i++) {
+				if (juegos[i][7] != null && juegos[i][7].equals(String.valueOf(calificacion))) {
+				encontrar = true;
+				posjuego = i;
+				System.out.println("el numero de juego que estas buscando con esa calificacion es el juego"+ posjuego);
+				}
+				
+			}
+			if (!encontrar) {
+				System.out.println("no se encontro el juego con esa calificacion");
+			}
+				for (int i = 0;i<contadorJuegos;i++) {
+					calificacionmax = Integer.parseInt(juegos[i][7]);
+					if (mejor < calificacionmax) {
+						mejor = calificacionmax;
+					}
+				}
+					for (int i = 0;i<contadorJuegos;i++) {
+					calificacionmin = Integer.parseInt(juegos[i][7]);
+						if (peor > calificacionmin) {
+						peor = calificacionmin;
+						}
+						
+					}
+					System.out.println("la peor calificacion es: "+ peor);
+					System.out.println("la mejor calificacion es: "+ mejor);
 		}
 
 }
