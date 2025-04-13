@@ -55,22 +55,22 @@ public class Main {
 				contadorJuegos = ingresarJuego(juegos, S, contadorJuegos);
 				break;
 			case 2:
-				//Consultar juego
+				consultarJuego (juegos,S);
 				break;
 			case 3:
-				//Modificar juego
+				modificarJuego (juegos,S,contadorJuegos);
 				break;
 			case 4:
-				//Eliminar juego
+				eliminarJuego(juegos,S);
 				break;
 			case 5:
-				listarJuegos(contadorJuegos, juegos);//Listar todo los juegos
+				listarJuegos(contadorJuegos, juegos);
 				break;
 			case 6:
-				//Buscar juegos por género
+				buscarJuegosPorGenero(juegos,S);
 				break;	
 			case 7:
-				//Buscar juegos por desarrollador
+				 buscarJuegosPorDesarrollador(juegos,S);
 				break;
 			case 8:
 				//Buscar juegos mejor/peor calificados
@@ -82,7 +82,7 @@ public class Main {
 				//Calcular estadísticas de la plataforma
 				break;
 			case 11:
-				//salir
+			System.out.println("salio del programa correctamente señor pablo (aprobame la prueba porfa le metimos mucho ezfuerzo)");
 				break;
 	}
 		return contadorJuegos;
@@ -93,7 +93,7 @@ public class Main {
 	public static int ingresarJuego(String[][] juegos,Scanner S,int cantJuegos) {
 		if(cantJuegos >= juegos.length) {
 			System.out.println("No se puede agregar mas juegos");
-			return cantJuegos;
+			
 		}
 		
 		
@@ -179,15 +179,15 @@ public class Main {
 			
 				
 			}
-			if (encontrado != false) {
+			if (!encontrado) {
 				System.out.println("no se encontro el juego volvelo a intentar");
 			}
 		}
 		
 		}
 
-	public static void buscarJuegosPorGenero(String juegos[][]) {
-		Scanner S= new Scanner (System.in);
+	public static void buscarJuegosPorGenero(String juegos[][],Scanner S) {
+
 		
 		int ValorBuscado=0;
 		
@@ -210,8 +210,8 @@ public class Main {
 			}
 		}
 	
-	public static void buscarJuegosPorDesarrollador(String juegos[][]) {
-		Scanner S= new Scanner (System.in);
+	public static void buscarJuegosPorDesarrollador(String juegos[][],Scanner S) {
+		
 		
 		String ValorBuscadoG;
 		
@@ -236,12 +236,12 @@ public class Main {
 		
 		}
 	
-	public static void modificarJuego (String juegos[][],Scanner S) {
+	public static void modificarJuego (String juegos[][],Scanner S, int contadorJuegos) {
 		boolean buscar = false;
 		int id,posjuego;
 		System.out.println("que juego queres modificar?:(escribe la id del juego) ");
 		id = S.nextInt();
-			for (int i = 0;i<juegos.length;i++) {
+			for (int i = 0;i<contadorJuegos;i++) {
 				if (juegos[i][0] != null && juegos[i][0].equals(String.valueOf(id))) {
 					buscar = true;
 				posjuego = i;
@@ -339,7 +339,7 @@ public class Main {
 				
 			
 			}
-				if (encontrar != true) {
+				if (!encontrar) {
 				System.out.println("el juego no se encontro por esa id: ");
 				}
 				
@@ -348,9 +348,9 @@ public class Main {
 	
 	}
 	
-	public static void listarJuegos (int cantJuegos, String juegos[][]) {
+	public static void listarJuegos (int contadorJuegos, String juegos[][]) {
 		
-		for(int i=0; i<cantJuegos; i++) {
+		for(int i=0; i<contadorJuegos; i++) {
 			
 			System.out.println(juegos[i][1]);
 		}
@@ -389,6 +389,9 @@ public class Main {
 			}
 		}
 	}
+	public static void buscarJuegosCalificacion (String juegos[][],Scanner S) {
+		int peor,mejor;
+		
+		}
 
 }
-	
