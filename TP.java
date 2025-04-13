@@ -117,7 +117,7 @@ public class Main {
 		juegos[cantJuegos][5] = String.valueOf(anio);
 		
 		System.out.println("Ingrese el precio del juego: ");
-		int precio =  ingresarEntero(S, 0, 10000000);
+		int precio =  ingresarEntero(S, 1, 200000);
 		juegos[cantJuegos][6] = String.valueOf(precio);
 		
 		System.out.println("Ingrese la calificacion del juego: ");
