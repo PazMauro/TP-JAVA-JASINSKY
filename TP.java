@@ -357,5 +357,28 @@ public class Main {
 		
 	
 	}
+	
+	public static void sugerirJuegosSimilares(Scanner S, int cantJuegos, String juegos[][]) {
+		System.out.println("ingrese a que juego quiere buscarle sus parecidos: ");
+		String jueg = S.nextLine();
+		
+		for(int i=0; i<cantJuegos; i++) {
+			
+			if(juegos[i][1] == jueg) {
+				
+				String des = juegos[i][2];
+				String gen = juegos[i][3];
+			
+			}
+		
+		}
+		System.out.println("los juegos similares a este son: \n");
+		for(int i=0; i<cantJuegos; i++) {
+			if(juegos[i][2] == des || juegos[i][3] == gen) {
+				System.out.println("\n" + juegos[i][1]);
+			}
+		}
+	}
 
 }
+	
