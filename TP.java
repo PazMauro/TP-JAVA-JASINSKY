@@ -55,25 +55,25 @@ public class Main {
 				contadorJuegos = ingresarJuego(juegos, S, contadorJuegos);
 				break;
 			case 2:
-				consultarJuego (juegos,S);
+				consultarJuego(juegos,S);
 				break;
 			case 3:
-				modificarJuego (juegos,S,contadorJuegos);
+				modificarJuego(juegos,S);
 				break;
 			case 4:
 				eliminarJuego(juegos,S);
 				break;
 			case 5:
-				listarJuegos(contadorJuegos, juegos);
+				listarJuegos(contadorJuegos, juegos);//Listar todo los juegos
 				break;
 			case 6:
 				buscarJuegosPorGenero(juegos,S);
 				break;	
 			case 7:
-				 buscarJuegosPorDesarrollador(juegos,S);
+				buscarJuegosPorDesarrollador(juegos,S);
 				break;
 			case 8:
-				buscarJuegosCalificacion (juegos,S,contadorJuegos);
+				buscarJuegosCalificacion(juegos,S,contadorJuegos);
 				break;
 			case 9:
 				//Buscar juegos por rango de precio
@@ -82,7 +82,7 @@ public class Main {
 				//Calcular estadísticas de la plataforma
 				break;
 			case 11:
-			System.out.println("salio del programa correctamente señor pablo (aprobame la prueba porfa le metimos mucho ezfuerzo)");
+				//salir
 				break;
 	}
 		return contadorJuegos;
@@ -93,7 +93,7 @@ public class Main {
 	public static int ingresarJuego(String[][] juegos,Scanner S,int cantJuegos) {
 		if(cantJuegos >= juegos.length) {
 			System.out.println("No se puede agregar mas juegos");
-			
+			return cantJuegos;
 		}
 		
 		
@@ -139,109 +139,43 @@ public class Main {
 		return cantJuegos+1;
 	}
 	
-	public static void buscarJuego(String juegos[][], Scanner S) {
-		
-		
-		int opcion2=0;
+	
+	
+	public static void consultarJuego (String juegos[][],Scanner S) {
 		int id;
-		String titulo;
+	System.out.println("Que juego queres consultar decime la id: ");
+		id = S.nextInt();
+		boolean encontrar = false;
 		int posjuego;
-		System.out.println("Como deseas realizar la busqueda por ID o el titulo del juego:(1 si es por id 2 si es por titulo ) ");
-		opcion2=S.nextInt();
-		
-		S.nextLine();
-		
-		boolean encontrado = false;
-		
-		if (opcion2==1) {
-			System.out.println("decime que id queres buscar y yo te digo en que posicion esta: ");
-			id = S.nextInt();
-			for(int i=0; i<juegos.length; i++) {
-				if (juegos[i][0] != null && juegos[i][0].equals(String.valueOf(id))) {
-					encontrado = true;
-					posjuego = i;
-				System.out.println("se encontro el juego que estabas buscando y esta en la posicion"+ posjuego);
-				}
-			
-			}
-			
-		}
-		
-		if (opcion2==2) {
 			for (int i = 0;i<juegos.length;i++) {
-				System.out.println("decime que titulo de juego queres buscar: ");
-				titulo = S.nextLine();
-			if (juegos[i][1] != null && juegos[i][1].equals(titulo)) {
-				encontrado = true;
-			posjuego = i;
-			System.out.println("el juego fue encontrado y esta en la posicion"+ posjuego);	
-			}
-			
+				if (juegos[i][0] != null && juegos[i][0].equals(String.valueOf(id))) {
+				encontrar = true;
+				posjuego = i;
+				System.out.println("se encontro la id del juego estos son los datos: ");
 				
-			}
-			if (!encontrado) {
-				System.out.println("no se encontro el juego volvelo a intentar");
-			}
-		}
-		
-		}
-
-	public static void buscarJuegosPorGenero(String juegos[][],Scanner S) {
-
-		
-		int ValorBuscado=0;
-		
-		System.out.println("Ingrese el genero que deseas buscar: ");
-		
-		ValorBuscado=S.nextInt();
-		
-		S.nextLine();
-		
-			boolean encontrado=false;
-		
-		for(int i =0; i<juegos.length; i++) {
-				if(juegos[i][3]!=null && juegos[i][3].equals(String.valueOf(ValorBuscado))) {
-					System.out.println("El juego " + juegos[i][1] +" "+ "es de genero : " + ValorBuscado);
-					encontrado=true;
-				}
-				}
-		if(encontrado==false){
-			System.out.println("No se encontro ningun juego con ese genero");
-			}
-		}
-	
-	public static void buscarJuegosPorDesarrollador(String juegos[][],Scanner S) {
-		
-		
-		String ValorBuscadoG;
-		
-		System.out.println("Ingrese el desarrolador que deseas buscar: ");
-		
-		ValorBuscadoG=S.nextLine();
-		
-			boolean encontrado = false;
-		
-		for(int i =0; i<juegos.length; i++) {
-			
-				if(juegos[i][2] != null && juegos[i][2].equalsIgnoreCase(ValorBuscadoG)) {
-					
-					System.out.println("El juego " + juegos[i][1] +" "+ "es desarrolado por: " + ValorBuscadoG);
-					encontrado = true;
+				System.out.println("la id es: " + juegos[posjuego][0]);
+				System.out.println("la titulo es: " + juegos[posjuego][1]);
+				System.out.println("la desarrollador es: " + juegos[posjuego][2]);
+				System.out.println("la género es: " + juegos[posjuego][3]);
+				System.out.println("la clasificacion es: " + juegos[posjuego][4]);
+				System.out.println("la año es: " + juegos[posjuego][5]);
+				System.out.println("la precio es: " + juegos[posjuego][6]);
+				System.out.println("la calificacion es: " + juegos[posjuego][7]);
 				}
 				
+			
+			}
+				if (encontrar != true) {
+				System.out.println("el juego no se encontro por esa id: ");
 				}
-		if (!encontrado) {
-		    System.out.println("No se encontró ningún juego con ese desarrollador.");
-		}
-		
-		}
+	}
 	
-	public static void modificarJuego (String juegos[][],Scanner S, int contadorJuegos) {
+	public static void modificarJuego (String juegos[][],Scanner S) {
 		boolean buscar = false;
 		int id,posjuego;
 		System.out.println("que juego queres modificar?:(escribe la id del juego) ");
 		id = S.nextInt();
-			for (int i = 0;i<contadorJuegos;i++) {
+			for (int i = 0;i<juegos.length;i++) {
 				if (juegos[i][0] != null && juegos[i][0].equals(String.valueOf(id))) {
 					buscar = true;
 				posjuego = i;
@@ -315,42 +249,104 @@ public class Main {
 	    System.out.println("No se encontró ningún juego con ese ID.");
 	}
 	
-	public static void consultarJuego (String juegos[][],Scanner S) {
+	public static void buscarJuego(String juegos[][], Scanner S) {
+		
+		
+		int opcion2=0;
 		int id;
-	System.out.println("que juego queres consultar decime la id: ");
-		id = S.nextInt();
-		boolean encontrar = false;
+		String titulo;
 		int posjuego;
-			for (int i = 0;i<juegos.length;i++) {
+		System.out.println("Como deseas realizar la busqueda por ID o el titulo del juego:(1 si es por id 2 si es por titulo ) ");
+		opcion2=S.nextInt();
+		
+		S.nextLine();
+		
+		boolean encontrado = false;
+		
+		if (opcion2==1) {
+			System.out.println("decime que id queres buscar y yo te digo en que posicion esta: ");
+			id = S.nextInt();
+			for(int i=0; i<juegos.length; i++) {
 				if (juegos[i][0] != null && juegos[i][0].equals(String.valueOf(id))) {
-				encontrar = true;
-				posjuego = i;
-				System.out.println("se encontro la id del juego estos son los datos: ");
-				
-				System.out.println("la id es: " + juegos[posjuego][0]);
-				System.out.println("la titulo es: " + juegos[posjuego][1]);
-				System.out.println("la desarrollador es: " + juegos[posjuego][2]);
-				System.out.println("la género es: " + juegos[posjuego][3]);
-				System.out.println("la clasificacion es: " + juegos[posjuego][4]);
-				System.out.println("la año es: " + juegos[posjuego][5]);
-				System.out.println("la precio es: " + juegos[posjuego][6]);
-				System.out.println("la calificacion es: " + juegos[posjuego][7]);
+					encontrado = true;
+					posjuego = i;
+				System.out.println("se encontro el juego que estabas buscando y esta en la posicion"+ posjuego);
 				}
-				
 			
 			}
-				if (!encontrar) {
-				System.out.println("el juego no se encontro por esa id: ");
-				}
-				
+			
+		}
+		
+		if (opcion2==2) {
+			for (int i = 0;i<juegos.length;i++) {
+				System.out.println("decime que titulo de juego queres buscar: ");
+				titulo = S.nextLine();
+			if (juegos[i][1] != null && juegos[i][1].equals(titulo)) {
+				encontrado = true;
+			posjuego = i;
+			System.out.println("el juego fue encontrado y esta en la posicion"+ posjuego);	
+			}
 			
 				
-	
+			}
+			if (encontrado != false) {
+				System.out.println("no se encontro el juego volvelo a intentar");
+			}
+		}
+		
+	}
+
+	public static void buscarJuegosPorGenero(String juegos[][],Scanner S) {
+		
+		int ValorBuscado=0;
+		
+		System.out.println("Ingrese el genero que deseas buscar: ");
+		
+		ValorBuscado=S.nextInt();
+		
+		S.nextLine();
+		
+			boolean encontrado=false;
+		
+		for(int i =0; i<juegos.length; i++) {
+				if(juegos[i][3]!=null && juegos[i][3].equals(String.valueOf(ValorBuscado))) {
+					System.out.println("El juego " + juegos[i][1] +" "+ "es de genero : " + ValorBuscado);
+					encontrado=true;
+				}
+				}
+		if(encontrado==false){
+			System.out.println("No se encontro ningun juego con ese genero");
+			}
 	}
 	
-	public static void listarJuegos (int contadorJuegos, String juegos[][]) {
+	public static void buscarJuegosPorDesarrollador(String juegos[][],Scanner S) {
 		
-		for(int i=0; i<contadorJuegos; i++) {
+		String ValorBuscadoG;
+		
+		System.out.println("Ingrese el desarrolador que deseas buscar: ");
+		
+		ValorBuscadoG=S.nextLine();
+		
+			boolean encontrado = false;
+		
+		for(int i =0; i<juegos.length; i++) {
+			
+				if(juegos[i][2] != null && juegos[i][2].equalsIgnoreCase(ValorBuscadoG)) {
+					
+					System.out.println("El juego " + juegos[i][1] +" "+ "es desarrolado por: " + ValorBuscadoG);
+					encontrado = true;
+				}
+				
+				}
+		if (!encontrado) {
+		    System.out.println("No se encontró ningún juego con ese desarrollador.");
+		}
+		
+	}
+	
+	public static void listarJuegos (int cantJuegos, String juegos[][]) {
+		
+		for(int i=0; i<cantJuegos; i++) {
 			
 			System.out.println(juegos[i][1]);
 		}
@@ -389,6 +385,7 @@ public class Main {
 			}
 		}
 	}
+	
 	public static void buscarJuegosCalificacion (String juegos[][],Scanner S,int contadorJuegos) {
 		int peor = 9999,mejor = 0,calificacion,posjuego,calificacionmax = 0,calificacionmin = 0;
 		boolean encontrar = false;
@@ -421,6 +418,6 @@ public class Main {
 					}
 					System.out.println("la peor calificacion es: "+ peor);
 					System.out.println("la mejor calificacion es: "+ mejor);
-		}
+	}
 
 }
