@@ -1,5 +1,5 @@
 package tp;
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +22,7 @@ public class Main {
 		opcion = mostrarMenuYElegirOpcion (S);
 		contadorJuegos = generarAccion (juegos, S, opcion, contadorJuegos);
 		}while(opcion != 11);
-		
+		S.close();
 	}
 	
 	public static int mostrarMenuYElegirOpcion (Scanner S) {
@@ -48,9 +48,7 @@ public class Main {
 	}
 	
 	public static int generarAccion (String[][] juegos, Scanner S, int opcion, int contadorJuegos) {
-		
 		switch(opcion) {
-		
 			case 1:
 				contadorJuegos = ingresarJuego(juegos, S, contadorJuegos);
 				break;
@@ -96,50 +94,66 @@ public class Main {
 			return cantJuegos;
 		}
 		
-		
 		System.out.println("Ingrese ID del juego (1000 a 9999): ");
-		int id = S.nextInt(); 
-		S.nextLine();
+		int id=ingresarEntero(S, 1000, 9999);
 		juegos[cantJuegos][0]= String.valueOf(id);
 		
 		System.out.println("Ingrese titulo del juego: ");
 		juegos[cantJuegos][1] = S.nextLine();
 		
-		
 		System.out.println("Ingrese desarrolador del juego: ");
 		juegos[cantJuegos][2] = S.nextLine();
 
-		
 		System.out.println("Ingrese género del juego (1-accion, 2-aventura, 3-estrategia, 4-rpg, 5-deportes, 6-simulación): ");
-		int genero = S.nextInt();
+		int genero = ingresarEntero(S, 1, 6);
 		juegos[cantJuegos][3] = String.valueOf(genero);
-		S.nextLine();
 		
 		System.out.println("Ingrese clasificacion del juego: ");
-		int clasificacion = S.nextInt();
+		int clasificacion = ingresarEntero(S, 1, 10);
 		juegos[cantJuegos][4] = String.valueOf(clasificacion);
-		S.nextLine();
 		
 		System.out.println("Ingrese año de lanzamiento del juego: ");
-		int anio = S.nextInt();
+		int anio = ingresarEntero(S, 1990, 2025);
 		juegos[cantJuegos][5] = String.valueOf(anio);
-		S.nextLine();
 		
 		System.out.println("Ingrese el precio del juego: ");
-		int precio = S.nextInt();
+		int precio =  ingresarEntero(S, 0, 10000000);
 		juegos[cantJuegos][6] = String.valueOf(precio);
-		S.nextLine();
 		
-		System.out.println("Ingrese la calificacion del juego: ");
-		int calificacion = S.nextInt();
+		System.out.println("Ingrese la calificacion del juego: (1 para E (Para todos), 2 para T (Teen), 3 para M (Mature)");
+		int calificacion = ingresarEntero(S, 1, 3);
 		juegos[cantJuegos][7] = String.valueOf(calificacion);
-		S.nextLine();
-		
 		
 		return cantJuegos+1;
 	}
 	
-	
+	public static int ingresarEntero(Scanner S,int min, int max) {
+		
+		boolean valido=false;
+		int entero=0;
+		do {
+			
+		try {
+			
+			entero=S.nextInt();
+			if(entero >= min && entero <= max) {
+				System.out.println("El numero ingresado es valido");
+				valido=true;
+			} else {
+				System.out.println("El numero ingresado esta fuera del rango. Intente nuevamente: ");
+			}
+			
+			}catch(InputMismatchException e) {
+				System.out.println("Eso no es un numero valido. intenta nuevamente: ");
+				S.nextLine();
+			}
+		
+		
+		S.nextLine();
+		}while(!valido);
+		
+		return entero;
+	}
 	
 	public static void consultarJuego (String juegos[][],Scanner S) {
 		int id;
