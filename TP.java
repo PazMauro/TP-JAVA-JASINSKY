@@ -120,7 +120,7 @@ public class Main {
 		int precio =  ingresarEntero(S, 0, 10000000);
 		juegos[cantJuegos][6] = String.valueOf(precio);
 		
-		System.out.println("Ingrese la calificacion del juego: (1 para E (Para todos), 2 para T (Teen), 3 para M (Mature)");
+		System.out.println("Ingrese la calificacion del juego: ");
 		int calificacion = ingresarEntero(S, 1, 3);
 		juegos[cantJuegos][7] = String.valueOf(calificacion);
 		
