@@ -257,7 +257,7 @@ public class Main {
 				
 				System.out.println("Ingrese desarrolador del juego: ");
 				juegos[posjuego][2] = S.nextLine();
-
+				
 				
 				System.out.println("Ingrese género del juego (1-accion, 2-aventura, 3-estrategia, 4-rpg, 5-deportes, 6-simulación): ");
 				int genero = S.nextInt();
