@@ -427,6 +427,4 @@ public class Main {
     			    System.out.printf("Precio promedio: $%.2f\n", promedioj);
     			    System.out.printf("Calificación promedio: %.2f\n", promediocal);			
     }
-
-
 }
