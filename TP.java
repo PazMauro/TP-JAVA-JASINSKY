@@ -333,6 +333,88 @@ public class Main {
             System.out.println(juegos[i][1]);
         }
     }
+        public static void calcularEstadisticas (String juegos[][],int contadorJuegos) {
+    	float accion = 0,aventura = 0,estrategia = 0,RPG = 0,deportes = 0, simulacion = 0;
+    	float poraccion,poraventura,porestrategia,porRPG,pordeportes,porsimulacion;
+    	float todos = 0,Teen = 0,Mature = 0,portodos,porteen,pormature;
+    	float acumprecio = 0,promedioj,promediocal,acumcalificacion = 0;
+    	int conversion,conversion2;
+    		for (int i = 0; i < contadorJuegos;i++) {
+    			
+    				if (juegos[i][3].equals(String.valueOf(1))) {
+    				accion++;
+    				}
+    				if (juegos[i][3].equals(String.valueOf(2))) {
+        				aventura++;
+        				}
+    				if (juegos[i][3].equals(String.valueOf(3))) {
+        				estrategia++;
+        				}
+    				if (juegos[i][3].equals(String.valueOf(4))) {
+        				RPG++;
+        				}
+    				if (juegos[i][3].equals(String.valueOf(5))) {
+        				deportes++;
+        				}
+    				if (juegos[i][3].equals(String.valueOf(6))) {
+						simulacion++;
+        				}
+    		}
+    		poraccion = accion*100/contadorJuegos;
+    		poraventura = aventura*100/contadorJuegos;
+    		porestrategia = estrategia*100/contadorJuegos;
+    		porRPG = RPG*100/contadorJuegos;
+    		pordeportes = deportes*100/contadorJuegos;
+    		porsimulacion = simulacion*100/contadorJuegos;
+    			for (int i = 0; i < contadorJuegos;i++) {
+    				if (juegos[i][4].equals(String.valueOf(1))) {
+        				todos++;
+        				}
+    				if (juegos[i][4].equals(String.valueOf(2))) {
+    					Teen++;
+        				}
+    				if (juegos[i][4].equals(String.valueOf(3))) {
+    					Mature++;
+        				}
+    				
+    				
+    			}
+    			portodos =  todos*100/contadorJuegos;
+    			porteen = Teen*100/contadorJuegos;
+    			pormature = Mature*100/contadorJuegos;
+    			
+    			for (int i = 0; i < contadorJuegos;i++) {
+    				conversion = Integer.parseInt(juegos[i][6]);
+    				acumprecio += conversion; 
+    				
+
+    			}
+    			promedioj = acumprecio/contadorJuegos;
+    			
+	for (int i = 0; i < contadorJuegos;i++) {
+		conversion2 = Integer.parseInt(juegos[i][7]);
+			conversion2 += acumcalificacion; 
+    				
+
+    			}
+    			promediocal = acumcalificacion/contadorJuegos;
+    			 System.out.println("----- Porcentaje por género -----");
+    			    System.out.printf("Acción: %.2f%%\n", poraccion);
+    			    System.out.printf("Aventura: %.2f%%\n", poraventura);
+    			    System.out.printf("Estrategia: %.2f%%\n", porestrategia);
+    			    System.out.printf("RPG: %.2f%%\n", porRPG);
+    			    System.out.printf("Deportes: %.2f%%\n", pordeportes);
+    			    System.out.printf("Simulación: %.2f%%\n", porsimulacion);
+
+    			    System.out.println("\n----- Porcentaje por clasificación -----");
+    			    System.out.printf("Todos: %.2f%%\n", portodos);
+    			    System.out.printf("Teen: %.2f%%\n", porteen);
+    			    System.out.printf("Mature: %.2f%%\n", pormature);
+
+    			    System.out.println("\n----- Promedios -----");
+    			    System.out.printf("Precio promedio: $%.2f\n", promedioj);
+    			    System.out.printf("Calificación promedio: %.2f\n", promediocal);			
+    }
 
 
 }
