@@ -137,7 +137,7 @@ public class Main {
 
     public static void consultarJuego(String juegos[][], Scanner S, int contadorJuegos) {
         System.out.println("ID del juego que querés consultar: ");
-        int id = S.nextInt();
+        int id = ingresarEntero(S, 1000, 9999);
         boolean encontrar = false;
         for (int i = 0; i < contadorJuegos; i++) {
             if (juegos[i][0].equals(String.valueOf(id))) {
@@ -160,7 +160,7 @@ public class Main {
 
     public static void modificarJuego(String juegos[][], Scanner S, int contadorJuegos) {
         System.out.println("¿Qué juego querés modificar? Ingresá la ID:");
-        int id = S.nextInt();
+        int id = ingresarEntero(S, 1000, 9999);
         S.nextLine();
         for (int i = 0; i < contadorJuegos; i++) {
             if (juegos[i][0].equals(String.valueOf(id))) {
@@ -197,7 +197,7 @@ public class Main {
 
     public static void eliminarJuego(String juegos[][], Scanner S, int contadorJuegos) {
         System.out.println("ID del juego a eliminar:");
-        int id = S.nextInt();
+        int id = ingresarEntero(S, 1000, 9999);
         S.nextLine();
         for (int i = 0; i < contadorJuegos; i++) {
             if (juegos[i][0].equals(String.valueOf(id))) {
@@ -220,7 +220,7 @@ public class Main {
 
         if (opcion == 1) {
             System.out.println("Ingrese ID:");
-            int id = S.nextInt();
+            int id = ingresarEntero(S, 1000, 9999);
             for (int i = 0; i < contadorJuegos; i++) {
                 if (juegos[i][0].equals(String.valueOf(id))) {
                     System.out.println("Juego encontrado en la posición: " + i);
