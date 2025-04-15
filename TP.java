@@ -67,6 +67,7 @@ public class Main {
             case 9:
             	break;
             case 10:
+			calcularEstadisticas (juegos,contadorJuegos);
             	break;
             case 11:
             System.out.println("se salio del programa correctamente: ");	
