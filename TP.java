@@ -65,6 +65,7 @@ public class Main {
                 buscarJuegosCalificacion(juegos, S, contadorJuegos);
                 break;
             case 9:
+            	rangoPrecio(juegos,S,contadorJuegos);
             	break;
             case 10:
 			calcularEstadisticas (juegos,contadorJuegos);
@@ -136,22 +137,33 @@ public class Main {
         return entero;
     }
     
-    public static void validarID(String juegos[][] ,int id, int contadorJuegos) {
-    	String id1= String.valueOf(id);
+    public static void rangoPrecio(String juegos[][], Scanner S,int contadorJuegos) {
     	
-    	boolean encontrado=false;
-    
-    	for(int i=0;i<contadorJuegos;i++) {
-    		if(juegos[i][0].equals(id1)) {
-    			encontrado=true;
+    	 System.out.println("Ingrese el primer valor del rango de precios: ");
+    	    int precio1 = S.nextInt();
+
+    	    System.out.println("Ingrese el segundo valor del rango de precios: ");
+    	    int precio2 = S.nextInt();
+    	    
+    	    int min = Math.min(precio1, precio2);
+    	    int max = Math.max(precio1, precio2);
+    	    
+    	    
+    	boolean encontrar = false;
+    	
+    		
+    		for(int i=0;i<contadorJuegos;i++) {
+    			int preciojuego = Integer.valueOf(juegos[i][6]);
+    			
+    			if(preciojuego>=min && preciojuego<=max) {
+    				System.out.println("Título del juego que esta entre esos rangos de precio " + juegos[i][1]);
+    				encontrar=true;
+    			}
     		}
-    	}
+    		if(!encontrar) {
+    			System.out.println("no existe ningun juego entre ese rango de precio");
+    		}
     	
-    	if(encontrado) {
-    		System.out.println("El ID ingresado ya existe");
-    	} else {
-    		System.out.println("El ID se ingreso correctamente");
-    	}
     }
     
     public static void consultarJuego(String juegos[][], Scanner S, int contadorJuegos) {
@@ -187,7 +199,6 @@ public class Main {
     public static void modificarJuego(String juegos[][], Scanner S, int contadorJuegos) {
         System.out.println("¿Qué juego querés modificar? Ingresá la ID:");
         int id = ingresarEntero(S, 1000, 9999);
-        S.nextLine();
         for (int i = 0; i < contadorJuegos; i++) {
             if (juegos[i][0].equals(String.valueOf(id))) {
                 System.out.println("Se encontró el juego. Ingresá los nuevos datos:");
