@@ -64,6 +64,13 @@ public class Main {
             case 8:
                 buscarJuegosCalificacion(juegos, S, contadorJuegos);
                 break;
+            case 9:
+            	break;
+            case 10:
+            	break;
+            case 11:
+            System.out.println("se salio del programa correctamente: ");	
+            	break;
         }
         return contadorJuegos;
     }
