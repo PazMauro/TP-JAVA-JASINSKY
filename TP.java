@@ -302,32 +302,5 @@ public class Main {
         }
     }
 
-    public static void sugerirJuegosSimilares(Scanner S, int contadorJuegos, String juegos[][]) {
-        System.out.println("Ingrese el título del juego a comparar:");
-        String base = S.nextLine();
-        String gen; 
-	String dev;
-        boolean encontrado = false;
 
-        for (int i = 0; i < contadorJuegos; i++) {
-            if (juegos[i][1].equals(base)) {
-                gen = juegos[i][3];
-                dev = juegos[i][2];
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Juego base no encontrado.");
-            return;
-        }
-
-        System.out.println("Juegos similares:");
-        for (int i = 0; i < contadorJuegos; i++) {
-            if (!juegos[i][1].equals(base) && (juegos[i][3].equals(gen) || juegos[i][2].equals(dev))) {
-                System.out.println(juegos[i][1]);
-            }
-        }
-    }
 }
