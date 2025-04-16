@@ -3,6 +3,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+	
+	public static final boolean MODO_PRUEBA = true;
 
     public static void main(String[] args) {
         Scanner S = new Scanner(System.in);
@@ -11,12 +13,39 @@ public class Main {
         final int cantJuego = 80;
         final int cantDatos = 8;
         String juegos[][] = new String[cantJuego][cantDatos];
+        
+        if (MODO_PRUEBA) {
+        	contadorJuegos = cargarDatosPrueba(juegos);
+        	System.out.println("Modo prueba activado");
+        }
 
         do {
             opcion = mostrarMenuYElegirOpcion(S);
             contadorJuegos = generarAccion(juegos, S, opcion, contadorJuegos);
         } while (opcion != 11);
         S.close();
+    }
+    
+    public static int cargarDatosPrueba(String[][] juegos) {
+    	String[][] juegosPrueba = {
+    			{"1001", "Elden Ring", "FromSoftware", "4", "3", "2022", "8999", "9"},
+                {"1002", "FIFA 23", "EA Sports", "5", "1", "2022", "5999", "7"},
+                {"1003", "The Legend of Zelda", "Nintendo", "2", "1", "2017", "4999", "10"},
+                {"1004", "Civilization VI", "Firaxis Games", "3", "2", "2016", "2999", "8"},
+                {"1005", "God of War", "Santa Monica Studio", "1", "3", "2018", "6999", "9"},
+                {"1006", "Minecraft", "Mojang", "6", "1", "2011", "1999", "9"},
+                {"1007", "The Sims 4", "Maxis", "6", "2", "2014", "3999", "6"},
+                {"1008", "NBA 2K24", "2K Sports", "5", "3", "2023", "6499", "7"},
+                {"1009", "Hollow Knight", "Team Cherry", "2", "2", "2017", "2599", "9"},
+                {"1010", "Starcraft II", "Blizzard", "3", "2", "2010", "3499", "8"}
+    	};
+    	
+    	for (int i = 0; i < juegosPrueba.length; i++) {
+    		for (int j = 0; j < juegosPrueba[i].length; j++) {
+    			juegos[i][j] = juegosPrueba[i][j];
+    		}
+    	}
+    	return juegosPrueba.length;
     }
 
     public static int mostrarMenuYElegirOpcion(Scanner S) {
@@ -39,18 +68,22 @@ public class Main {
     }
 
     public static int generarAccion(String[][] juegos, Scanner S, int opcion, int contadorJuegos) {
+    	int pos;
         switch (opcion) {
             case 1:
                 contadorJuegos = ingresarJuego(juegos, S, contadorJuegos);
                 break;
             case 2:
-                consultarJuego(juegos, S, contadorJuegos);
+                pos = buscarJuego(juegos, S, contadorJuegos);
+                if (pos != -1) consultarJuego(juegos, pos);
                 break;
             case 3:
-                modificarJuego(juegos, S, contadorJuegos);
+                pos = buscarJuego(juegos, S, contadorJuegos);
+                if (pos != -1) modificarJuego(juegos, S, pos);
                 break;
             case 4:
-                eliminarJuego(juegos, S, contadorJuegos);
+                pos = buscarJuego(juegos, S, contadorJuegos);
+                if (pos != -1) eliminarJuego(juegos, pos, contadorJuegos);
                 break;
             case 5:
                 listarJuegos(contadorJuegos, juegos);
@@ -77,14 +110,107 @@ public class Main {
         return contadorJuegos;
     }
 
+    public static int buscarJuego(String[][] juegos, Scanner S, int contadorJuegos) {
+        System.out.println("¿Cómo desea buscar el juego?\n(1) ID\n(2) Título");
+        int opcion = ingresarEntero(S, 1, 2);
+
+        if (opcion == 1) {
+            System.out.print("Ingrese ID del juego: ");
+            int id = ingresarEntero(S, 1000, 9999);
+            for (int i = 0; i < contadorJuegos; i++) {
+                if (juegos[i][0].equals(String.valueOf(id))) {
+                    return i;
+                }
+            }
+        } else {
+            System.out.print("Ingrese título del juego: ");
+            String titulo = S.nextLine();
+            for (int i = 0; i < contadorJuegos; i++) {
+                if (juegos[i][1].equalsIgnoreCase(titulo)) {
+                    return i;
+                }
+            }
+        }
+        System.out.println("Juego no encontrado.");
+        return -1;
+    }
+
+    public static boolean validarID(String[][] juegos, int id, int contadorJuegos) {
+        if (id < 1000 || id > 9999) return false;
+        for (int i = 0; i < contadorJuegos; i++) {
+            if (juegos[i][0].equals(String.valueOf(id))) return false;
+        }
+        return true;
+    }
+    
+    public static void consultarJuego(String[][] juegos, int pos) {
+        System.out.println("Se encontró el juego, estos son los datos:");
+        System.out.println("ID: " + juegos[pos][0]);
+        System.out.println("Título: " + juegos[pos][1]);
+        System.out.println("Desarrollador: " + juegos[pos][2]);
+        System.out.println("Género: " + juegos[pos][3]);
+        System.out.println("Clasificación: " + juegos[pos][4]);
+        System.out.println("Año: " + juegos[pos][5]);
+        System.out.println("Precio: " + juegos[pos][6]);
+        System.out.println("Calificación: " + juegos[pos][7]);
+    }
+
+    public static void modificarJuego(String[][] juegos, Scanner S, int pos) {
+        System.out.println("Se encontró el juego. Ingresá los nuevos datos:");
+        int nuevoId;
+        do {
+        	System.out.println("Nuevo ID:");
+        	nuevoId = ingresarEntero(S, 1000, 9999);
+        	if (!validarID(juegos, nuevoId, pos)) {
+        		System.out.println("El ID ya existe o no es valido, intenta denuevo");
+        	}
+        } while (!validarID(juegos, nuevoId, pos));
+        juegos[pos][0] = String.valueOf(nuevoId);
+
+        System.out.println("Título:");
+        juegos[pos][1] = S.nextLine();
+
+        System.out.println("Desarrollador:");
+        juegos[pos][2] = S.nextLine();
+
+        System.out.println("Género:");
+        juegos[pos][3] = String.valueOf(ingresarEntero(S, 1, 6));
+
+        System.out.println("Clasificación:");
+        juegos[pos][4] = String.valueOf(ingresarEntero(S, 1, 10));
+
+        System.out.println("Año:");
+        juegos[pos][5] = String.valueOf(ingresarEntero(S, 1990, 2025));
+
+        System.out.println("Precio:");
+        juegos[pos][6] = String.valueOf(ingresarEntero(S, 1, 200000));
+
+        System.out.println("Calificación:");
+        juegos[pos][7] = String.valueOf(ingresarEntero(S, 1, 3));
+    }
+
+    public static void eliminarJuego(String[][] juegos, int pos, int contadorJuegos) {
+        for (int i = pos; i < contadorJuegos - 1; i++) {
+            juegos[i] = juegos[i + 1];
+        }
+        juegos[contadorJuegos - 1] = null;
+        System.out.println("Juego eliminado.");
+    }
+
     public static int ingresarJuego(String[][] juegos, Scanner S, int cantJuegos) {
         if (cantJuegos >= juegos.length) {
             System.out.println("No se puede agregar más juegos");
             return cantJuegos;
         }
 
-        System.out.println("Ingrese ID del juego (1000 a 9999): ");
-        int id = ingresarEntero(S, 1000, 9999);
+        int id;
+        do {
+        	System.out.println("Ingrese ID del juego (1000 a 9999): ");
+        	id = ingresarEntero(S, 1000, 9999);
+        	if (!validarID(juegos, id, cantJuegos)) {
+        		System.out.println("El ID ya existe o no es valido, intenta denuevo");
+        	}
+        } while (!validarID(juegos, id, cantJuegos));
         juegos[cantJuegos][0] = String.valueOf(id);
 
         System.out.println("Ingrese título del juego: ");
@@ -164,120 +290,6 @@ public class Main {
     			System.out.println("no existe ningun juego entre ese rango de precio");
     		}
     	
-    }
-    
-    public static void consultarJuego(String juegos[][], Scanner S, int contadorJuegos) {
-        
-    	System.out.println("ID del juego que querés consultar: ");
-        int id = ingresarEntero(S, 1000, 9999);
-        boolean encontrar = false;
-        do {
-        	
-        
-        for (int i = 0; i < contadorJuegos; i++) {
-            if (juegos[i][0].equals(String.valueOf(id))) {
-                System.out.println("Se encontró el juego, estos son los datos:");
-                System.out.println("ID: " + juegos[i][0]);
-                System.out.println("Título: " + juegos[i][1]);
-                System.out.println("Desarrollador: " + juegos[i][2]);
-                System.out.println("Género: " + juegos[i][3]);
-                System.out.println("Clasificación: " + juegos[i][4]);
-                System.out.println("Año: " + juegos[i][5]);
-                System.out.println("Precio: " + juegos[i][6]);
-                System.out.println("Calificación: " + juegos[i][7]);
-                encontrar = true;
-            }
-        }
-        if (!encontrar) {
-            System.out.println("No existe ningún juego con esa ID.");
-        }
-        
-    }while(encontrar);
-        
-    }
-
-    public static void modificarJuego(String juegos[][], Scanner S, int contadorJuegos) {
-        System.out.println("¿Qué juego querés modificar? Ingresá la ID:");
-        int id = ingresarEntero(S, 1000, 9999);
-        for (int i = 0; i < contadorJuegos; i++) {
-            if (juegos[i][0].equals(String.valueOf(id))) {
-                System.out.println("Se encontró el juego. Ingresá los nuevos datos:");
-
-                System.out.println("Nuevo ID:");
-                juegos[i][0] = String.valueOf(ingresarEntero(S, 1000, 9999));
-
-                System.out.println("Título:");
-                juegos[i][1] = S.nextLine();
-
-                System.out.println("Desarrollador:");
-                juegos[i][2] = S.nextLine();
-
-                System.out.println("Género:");
-                juegos[i][3] = String.valueOf(ingresarEntero(S, 1, 6));
-
-                System.out.println("Clasificación:");
-                juegos[i][4] = String.valueOf(ingresarEntero(S, 1, 10));
-
-                System.out.println("Año:");
-                juegos[i][5] = String.valueOf(ingresarEntero(S, 1990, 2025));
-
-                System.out.println("Precio:");
-                juegos[i][6] = String.valueOf(ingresarEntero(S, 1, 200000));
-
-                System.out.println("Calificación:");
-                juegos[i][7] = String.valueOf(ingresarEntero(S, 1, 3));
-                return;
-            }
-        }
-        System.out.println("No se encontró ningún juego con esa ID.");
-    }
-
-    public static void eliminarJuego(String juegos[][], Scanner S, int contadorJuegos) {
-        System.out.println("ID del juego a eliminar:");
-        int id = ingresarEntero(S, 1000, 9999);
-        S.nextLine();
-        for (int i = 0; i < contadorJuegos; i++) {
-            if (juegos[i][0].equals(String.valueOf(id))) {
-                for (int j = i; j < contadorJuegos - 1; j++) {
-                    juegos[j] = juegos[j + 1];
-                }
-                juegos[contadorJuegos - 1] = null;
-                System.out.println("Juego eliminado.");
-                return;
-            }
-        }
-        System.out.println("No se encontró ningún juego con esa ID.");
-    }
-
-    public static void buscarJuego(String juegos[][], Scanner S, int contadorJuegos) {
-        System.out.println("Buscar por (1) ID o (2) título:");
-        int opcion = S.nextInt();
-        S.nextLine();
-        boolean encontrado = false;
-
-        if (opcion == 1) {
-            System.out.println("Ingrese ID:");
-            int id = ingresarEntero(S, 1000, 9999);
-            for (int i = 0; i < contadorJuegos; i++) {
-                if (juegos[i][0].equals(String.valueOf(id))) {
-                    System.out.println("Juego encontrado en la posición: " + i);
-                    encontrado = true;
-                }
-            }
-        } else if (opcion == 2) {
-            System.out.println("Ingrese título:");
-            String titulo = S.nextLine();
-            for (int i = 0; i < contadorJuegos; i++) {
-                if (juegos[i][1].equals(titulo)) {
-                    System.out.println("Juego encontrado en la posición: " + i);
-                    encontrado = true;
-                }
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Juego no encontrado.");
-        }
     }
 
     public static void buscarJuegosPorGenero(String juegos[][], Scanner S, int contadorJuegos) {
